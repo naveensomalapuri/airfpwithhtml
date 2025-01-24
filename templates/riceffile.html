@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI RFP TOOL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            padding: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+        }
+
+        .section-header {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        #section1 {
+            color: #0000ff;
+        }
+
+        #section2 {
+            color: black;
+        }
+
+        #section3 {
+            color: navy;
+        }
+
+        #section4 {
+            color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Title Section -->
+    <h1 class="text-3xl font-bold mb-6">Application Name</h1>
+
+    <!-- Container for dynamically added sections/subsections -->
+    <div id="dynamicSectionsContainer" class="mb-8">
+        <h2 class="section-title">Sections & Subsections</h2>
+    </div>
+
+    <!-- Add Section/Subsection Form -->
+    <div class="mt-8 border-t border-gray-300 pt-4">
+        <h2 class="section-title">Add New Section or Subsection</h2>
+        <form id="addSectionForm" class="mt-4">
+            <!-- Added Fields -->
+            <label for="customer_name" class="block font-semibold">Customer Name</label>
+            <input type="text" id="customer_name" name="customer_name" class="mt-1 w-full border border-gray-300 rounded-md p-2" required>
+
+            <label for="customer_short_name" class="block font-semibold mt-4">Customer Short Name</label>
+            <input type="text" id="customer_short_name" name="customer_short_name" class="mt-1 w-full border border-gray-300 rounded-md p-2" required>
+
+            <label for="ae_name" class="block font-semibold mt-4">AE Name</label>
+            <input type="text" id="ae_name" name="ae_name" class="mt-1 w-full border border-gray-300 rounded-md p-2" required>
+
+            <label for="title_rfp_template" class="block font-semibold mt-4">Title-RFP Template</label>
+            <input type="text" id="title_rfp_template" name="title_rfp_template" class="mt-1 w-full border border-gray-300 rounded-md p-2" required>
+
+            <label for="title" class="block font-semibold mt-4">Section/Sub-Section Name</label>
+            <input type="text" id="title" name="title" class="mt-1 w-full border border-gray-300 rounded-md p-2" required>
+
+            <label for="content" class="block font-semibold mt-4">Content</label>
+            <textarea id="content" name="content" class="mt-1 w-full border border-gray-300 rounded-md p-2" rows="3"></textarea>
+
+            <!-- Dropdown for dynamic values -->
+            <label for="dynamicDropdown" class="block font-semibold mt-4">Select Content</label>
+            <select id="dynamicDropdown" class="mt-1 w-full border border-gray-300 rounded-md p-2">
+                <option value="" disabled selected>Select an option</option>
+                <option value="Empty Content">Empty Content</option>
+                <option value="Overview">Overview</option>
+                <option value="NTT DATA Business Solutions Overview">NTT DATA Business Solutions Overview</option>
+            </select>
+
+            <label for="type" class="block font-semibold mt-4">Type</label>
+            <select id="type" name="type" class="mt-1 w-full border border-gray-300 rounded-md p-2" required>
+                <option value="section">Section</option>
+                <option value="subsection">Subsection</option>
+            </select>
+
+            <button type="button" onclick="addSection()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">Add</button>
+        </form>
+
+        <div id="responseMessage" class="mt-4 text-green-600"></div>
+    </div>
+
+    <!-- Prompt Bar and Generate Response Section -->
+    <div class="mt-8 border-t border-gray-300 pt-4">
+        <h2 class="section-title">Generate Response</h2>
+
+        <!-- Prompt Input Bar -->
+        <label for="prompt" class="block font-semibold">Enter Problem Description</label>
+        <input type="text" id="prompt" name="prompt" class="mt-1 w-full border border-gray-300 rounded-md p-2" required>
+
+        <button onclick="generateResponse()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">Generate Response</button>
+
+        <div id="responseMessage" class="mt-4 text-green-600"></div>
+    </div>
+
+    <!-- Download Button -->
+    <button onclick="downloadDoc()" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg">
+        Download
+    </button>
+
+    <script>
+        // Function to generate response for the form
+        async function generateResponse() {
+            const prompt = document.getElementById("prompt").value;
+
+            if (!prompt) {
+                alert("Please enter a prompt before generating content.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("client_problem", prompt);
+
+            try {
+                const response = await fetch("http://127.0.0.1:8000/generate_response", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById("content").value = JSON.stringify(data, null, 2);
+                } else {
+                    alert("Failed to generate response. Please try again.");
+                }
+            } catch (error) {
+                console.error("Error generating response:", error);
+                alert("An error occurred while generating the response.");
+            }
+        }
+
+        // Function to add a new section
+        async function addSection() {
+            const customerName = document.getElementById("customer_name").value.trim();
+            const customerShortName = document.getElementById("customer_short_name").value.trim();
+            const aeName = document.getElementById("ae_name").value.trim();
+            const titleRfpTemplate = document.getElementById("title_rfp_template").value.trim();
+            const title = document.getElementById("title").value.trim();
+            let content = document.getElementById("content").value.trim();
+            const type = document.getElementById("type").value;
+            const select_content = document.getElementById("dynamicDropdown").value;
+
+            if (!customerName || !customerShortName || !aeName || !titleRfpTemplate || !title || !type || !select_content) {
+                alert("Please fill in all fields before adding a section.");
+                return;
+            }
+
+            const payload = { customerName, customerShortName, aeName, titleRfpTemplate, title, content, type, select_content };
+
+            const response = await fetch("/add_section", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+                alert("Section added successfully!");
+            } else {
+                alert("Failed to add section. Please try again.");
+            }
+        }
+
+        // Updated download function to use `title_rfp_template`
+        async function downloadDoc() {
+            const titleRfpTemplate = document.getElementById("title_rfp_template").value.trim();
+
+            if (!titleRfpTemplate) {
+                alert("Please enter the Title-RFP Template before downloading.");
+                return;
+            }
+
+            try {
+                const response = await fetch(`/resume_download/${titleRfpTemplate}`, {
+                    method: "GET",
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.style.display = "none";
+                    a.href = url;
+                    a.download = `${titleRfpTemplate}.docx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    alert("Download started!");
+                } else {
+                    const errorData = await response.json();
+                    alert("Error downloading file: " + errorData.detail);
+                }
+            } catch (error) {
+                console.error("Error downloading file:", error);
+                alert("An error occurred while downloading the file.");
+            }
+        }
+    </script>
+</body>
+
+</html>

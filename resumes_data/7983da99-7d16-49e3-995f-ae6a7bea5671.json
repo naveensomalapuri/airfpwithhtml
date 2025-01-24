@@ -1,0 +1,43 @@
+[
+    {
+        "client_problem": "what is this new aifs tool is used for?",
+        "generated_resume": {
+            "project_name": "New AIFS Tool",
+            "RICEF_id": "AIFS-001",
+            "client_name": "Client Name",
+            "Voice_Of_Customer_WHAT_Functional_Description": "What should be the essential functions and capabilities of the new AIFS tool to effectively address our business needs?",
+            "Voice_Of_Customer_WHY_Business_Benefit_Need": "What business benefits will the new AIFS tool provide, and what risks or inefficiencies might arise if this solution is not in place?",
+            "Voice_Of_Customer_WHO_WHERE": "Who will be the primary users of the new AIFS tool, and which departments or organizational units will benefit the most?",
+            "Voice_Of_Customer_WHEN": "How often will the new AIFS tool need to be used, and are there specific times or intervals at which it must operate?",
+            "Voice_Of_Customer_HOW_Input": "What specific data inputs are necessary for the new AIFS tool to work effectively, and which fields or data sources are critical for achieving accurate results?",
+            "Voice_Of_Customer_HOW_Process": "What specific processes, analyses, or computations should the new AIFS tool perform on the input data to produce meaningful results?",
+            "Voice_Of_Customer_HOW_Output": "What should the final output of the new AIFS tool look like, and how should it be formatted or presented to best support our decision-making needs?",
+            "Functional_Design_Process": "",
+            "Functional_Design_Interface_Direction": "",
+            "Functional_Design_Error_Handling": "",
+            "Functional_Design_Frequency": "",
+            "Functional_Design_Data_Volume": "",
+            "Functional_Design_Security_Requirements": "",
+            "Functional_Design_Data_Sensitivity": "",
+            "Functional_Design_Unit_Testing": "",
+            "Functional_Design_Additional_Comments": "",
+            "Functional_Design_Rework_Log": "",
+            "Technical_Design_Design_Points": "",
+            "Technical_Design_Special_Configuration_Settings": "",
+            "Technical_Design_Outbound_Definition": "",
+            "Technical_Design_Target_Environment": "",
+            "Technical_Design_Starting_Transaction": "",
+            "Technical_Design_Triggering_Events": "",
+            "Technical_Design_Data_Transformation_Process": "",
+            "Technical_Design_Data_Transfer_Process": "",
+            "Technical_Design_Data_Format": "",
+            "Technical_Design_Error_Handling": "",
+            "Technical_Design_Additional_Process_Requirements": "",
+            "Technical_Design_Inbound_Definition": "",
+            "Technical_Design_Source_Environment": "",
+            "Technical_Design_Receiving_Transaction": "",
+            "Technical_Design_Rework_Log": ""
+        },
+        "file_name": "7983da99-7d16-49e3-995f-ae6a7bea5671.json"
+    }
+]

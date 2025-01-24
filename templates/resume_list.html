@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI RFP TOOL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Import Roboto Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .logo-font {
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar {
+            background-color: #F8F9FA;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .button-primary {
+            background-color: #007BFF;
+            color: #FFFFFF;
+            transition: background-color 0.3s ease;
+        }
+        .button-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body class="bg-light min-h-screen flex flex-col items-center justify-center">
+
+    <!-- Navbar -->
+    <nav class="navbar w-full shadow-lg fixed top-0 left-0 z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="flex items-center">
+                <!-- Logo with updated font -->
+                <span class="text-3xl font-bold logo-font text-gray-900">AI RFP TOOL</span>
+            </div>
+            <div class="flex items-center">
+                <img src="/static/NDBS logo.png" alt="Company Logo" class="h-16 w-auto">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Centered Create Button -->
+    <div class="flex flex-col items-center justify-center mt-20">
+        <a href="/create" class="button-primary px-6 py-3 rounded-full flex items-center shadow-lg">
+            <span class="mr-2 text-white text-lg font-semibold">Create</span>
+            <span class="text-white text-2xl font-bold">+</span>
+        </a>
+    </div>
+
+</body>
+</html>

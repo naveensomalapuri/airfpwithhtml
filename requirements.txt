@@ -1,0 +1,5 @@
+fastapi[standard]
+langchain-community
+openai
+pdfcrowd
+langchain-groq
